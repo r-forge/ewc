@@ -1,14 +1,3 @@
-# Edge-Weighted Closeness
-# by Angela Bohn and Norbert Walchhofer
-
-# Arguments
-# vnetwork: a valued adjacency matrix. Network must be recursively connected.
-# transform: binary. If TRUE: If network is not recursively connected, closeness.dist will only be calculated for largest component.
-  #If largest component is not recursively connected, it will be symmetrized with symmetrize.valued(network,rule="weak",mode="sum")
-
-# Value:
-# a vector of length n, where n is the number of nodes contained in vnetwork
-
 library(sna)
 source("symmetrize.valued.r")
 
@@ -20,31 +9,29 @@ ewc <- function(vnetwork,transform=TRUE){
     stop("Input data must be an adjacency matrix (square).")
   }
   if (transform==FALSE){
-    if (!sna::is.connected(vnetwork,connected="recursive")){
-      stop("Input network is not (recursively) connected. closeness.dist works only for (recursively) connected networks.","\n",
+    if (!sna::is.connected(vnetwork,connected="strong")){
+      stop("Input network is not strongly connected. ewc works only for strongly connected networks.","\n",
       "See ?component.dist(sna) or choose transform=TRUE.")
     }
   }
   if (transform==TRUE){
-    if (!sna::is.connected(vnetwork,connected="recursive")){
-      if (sna::is.connected(vnetwork,connected="weak")&!sna::is.connected(vnetwork,connected="recursive")){
-        network <- symmetrize.valued(vnetwork,rule="weak",mode="sum")
-        warning("As vnetwork is not recursively connected, it was symmetrized using the sum of line values")
-      }
-      if (!sna::is.connected(vnetwork,connected="weak")){
-        a <- dim(vnetwork)[1]
-        vnetwork <- component.largest(vnetwork,connected="weak",result="graph")
-        b <- dim(vnetwork)[1]
-        warning("As vnetwork is not recursively connected, closeness.dist was calculated only for largest component:","\n",
-                "  ",a-b," of ",a," nodes were omitted.")
-        if (!sna::is.connected(vnetwork,connected="recursive")){
-          vnetwork <- symmetrize.valued(vnetwork,rule="weak",mode="sum")
-          warning("As largest component of vnetwork is not recursively connected, it was symmetrized using the sum of line values")
-        }
+    if (!sna::is.connected(vnetwork,connected="strong")&sna::is.connected(vnetwork,connected="weak")){
+        vnetwork <- symmetrize.valued(vnetwork,mode="sum")
+        warning("As vnetwork is not strongly connected, it was symmetrized using the sum of line values. See ?symmetrize.valued(ewc).")
+    }
+    if (!sna::is.connected(vnetwork,connected="weak")){
+      a <- dim(vnetwork)[1]
+      vnetwork <- component.largest(vnetwork,connected="weak",result="graph")
+      b <- dim(vnetwork)[1]
+      warning("As vnetwork is not weakly connected, closeness.dist was calculated only for largest weak component:","\n",
+              "  ",a-b," of ",a," nodes were omitted.")
+      if (!sna::is.connected(vnetwork,connected="strong")){
+        vnetwork <- symmetrize.valued(vnetwork,mode="sum")
+        warning("As largest component of vnetwork is not strongly connected, it was symmetrized using the sum of line values")
       }
     }
   }
-  if (sum(unique(as.vector(vnetwork))==1)){
+  if (sum(unique(as.vector(vnetwork)))==1){
     warning("network is binary. Output will not be identical to closeness(sna).")
   }
   network <- vnetwork

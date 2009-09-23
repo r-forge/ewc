@@ -10,45 +10,23 @@
 # Value
 # a valued symmetric adjacency matrix
 
-symmetrize.valued <- function (network, rule = "weak",mode="max"){
-  if (!is.matrix(network)){
+symmetrize.valued <- function (vnetwork, mode="max"){
+  if (!is.matrix(vnetwork)){
     stop("Input data must be an adjacency matrix (square).")
   }
-  if (is.matrix(network)&(dim(network)[1]!=dim(network)[2])){
+  if (is.matrix(vnetwork)&(dim(vnetwork)[1]!=dim(vnetwork)[2])){
     stop("Input data must be an adjacency matrix (square).")
   }
-  n <- dim(network)[1]
-  m <- n
-  newmat <- network
+  n <- m <- dim(vnetwork)[1]
+  newmat <- vnetwork
   for (i in 1:n) {
     for (j in 1:m){
-      if (rule == "weak") {
-        if (network[i,j]!=0|network[j,i]!=0){
-          if (mode=="max"){
-            newmat[i,j] <- newmat[j,i] <- max(network[i,j],network[j,i])
-          }
-          if (mode=="sum"){
-            newmat[i,j] <- newmat[j,i] <- network[i,j]+network[j,i]
-            diag(newmat) <- diag(network)
-          }
-        }
-        if (network[i,j]==0&network[j,i]==0){
-          newmat[i,j] <- newmat[j,i] <- 0
-        }
+      if (mode=="max"){
+        newmat[i,j] <- newmat[j,i] <- max(vnetwork[i,j],vnetwork[j,i])
       }
-      if (rule == "strong") {
-        if (network[i,j]!=0&network[j,i]!=0){
-          if (mode=="max"){
-            newmat[i,j] <- newmat[j,i] <- max(network[i,j],network[j,i])
-          }
-          if (mode=="sum"){
-            newmat[i,j] <- newmat[j,i] <- sum(network[i,j],network[j,i])
-            diag(newmat) <- diag(network)
-          }
-        }
-        if (network[i,j]==0|network[j,i]==0){
-          newmat[i,j] <- newmat[j,i] <- 0
-        }
+      if (mode=="sum"){
+        newmat[i,j] <- newmat[j,i] <- vnetwork[i,j]+vnetwork[j,i]
+        diag(newmat) <- diag(vnetwork)
       }
     }
   }

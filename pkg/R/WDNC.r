@@ -12,7 +12,7 @@
 source("symmetrize.valued.r")
 library(sna)
 
-ewc.dist <- function(vnetwork,transform=TRUE){     # vnetwork is a weighted adjacency matrix
+wdnc <- function(vnetwork,transform=TRUE){     # vnetwork is a weighted adjacency matrix
   if (!is.matrix(vnetwork)){
     stop("Input data must be an adjacency matrix.")
   }
@@ -20,34 +20,28 @@ ewc.dist <- function(vnetwork,transform=TRUE){     # vnetwork is a weighted adja
     stop("Input data must be an adjacency matrix (square).")
   }
   if (transform==FALSE){
-    if (!sna::is.connected(vnetwork,connected="recursive")){
-      stop("Input network is not (recursively) connected. closeness.dist works only for (recursively) connected networks.","\n",
+    if (!sna::is.connected(vnetwork,connected="strong")){
+      stop("Input network is not strongly connected. ewc works only for strongly connected networks.","\n",
       "See ?component.dist(sna) or choose transform=TRUE.")
     }
   }
   if (transform==TRUE){
-    if (!sna::is.connected(vnetwork,connected="recursive")){
-      if (sna::is.connected(vnetwork,connected="weak")&!sna::is.connected(vnetwork,connected="recursive")){
-        network <- symmetrize.valued(vnetwork,rule="weak",mode="sum")
-        warning("As vnetwork is not recursively connected, it was symmetrized using the sum of line values")
-      }
-      if (!sna::is.connected(vnetwork,connected="weak")){
-        a <- dim(vnetwork)[1]
-        vnetwork <- component.largest(vnetwork,connected="weak",result="graph")
-        b <- dim(vnetwork)[1]
-        warning("As vnetwork is not recursively connected, closeness.dist was calculated only for largest component:","\n",
-                "  ",a-b," of ",a," nodes were omitted.")
-        if (!sna::is.connected(vnetwork,connected="recursive")){
-          vnetwork <- symmetrize.valued(vnetwork,rule="weak",mode="sum")
-          warning("As largest component of vnetwork is not recursively connected, it was symmetrized using the sum of line values")
-        }
+    if (!sna::is.connected(vnetwork,connected="strong")&sna::is.connected(vnetwork,connected="weak")){
+        vnetwork <- symmetrize.valued(vnetwork,mode="sum")
+        warning("As vnetwork is not strongly connected, it was symmetrized using the sum of line values. See ?symmetrize.valued(ewc).")
+    }
+    if (!sna::is.connected(vnetwork,connected="weak")){
+      a <- dim(vnetwork)[1]
+      vnetwork <- component.largest(vnetwork,connected="weak",result="graph")
+      b <- dim(vnetwork)[1]
+      warning("As vnetwork is not weakly connected, closeness.dist was calculated only for largest weak component:","\n",
+              "  ",a-b," of ",a," nodes were omitted.")
+      if (!sna::is.connected(vnetwork,connected="strong")){
+        vnetwork <- symmetrize.valued(vnetwork,mode="sum")
+        warning("As largest component of vnetwork is not strongly connected, it was symmetrized using the sum of line values")
       }
     }
   }
-  if (sum(unique(as.vector(vnetwork))==1)){
-    warning("network is binary. Output will not be identical to closeness(sna).")
-  }
-#  ewcmatrix <- cluster<- c()
   network <- vnetwork
   network[network>0] <- 1
   n <- dim(network)[1]
@@ -83,4 +77,4 @@ ewc.dist <- function(vnetwork,transform=TRUE){     # vnetwork is a weighted adja
 
 #Example:
 #network <- cbind(c(0,1),c(1,0))
-#ewc.dist(network)
+#wdnc(network)
