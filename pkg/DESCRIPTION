@@ -1,0 +1,10 @@
+Package: ewc
+Title: Edge-Weighted Closeness
+Version: 1
+Date: 2009-09-28
+Author: Angela Bohn and Norbert Walchhofer
+Maintainer: Angela Bohn <angela.bohn@gmail.com>
+Depends: R (>= 2.8.0), sna
+Description: Calculated EWC, a weighted version of closeness centrality and WDNC, a centrality measure based on EWC.
+License: GPL (>= 2)
+URL: https://r-forge.r-project.org/projects/ewc
