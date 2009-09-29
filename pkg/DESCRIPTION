@@ -1,6 +1,7 @@
 Package: ewc
 Title: Edge-Weighted Closeness
-Version: 1
+Contains: sna
+Version: 1.0
 Date: 2009-09-28
 Author: Angela Bohn and Norbert Walchhofer
 Maintainer: Angela Bohn <angela.bohn@gmail.com>
