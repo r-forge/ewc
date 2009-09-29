@@ -1,6 +1,3 @@
-library(sna)
-source("symmetrize.valued.r")
-
 ewc <- function(vnetwork,transform=TRUE){
   if (!is.matrix(vnetwork)){
     stop("Input data must be an adjacency matrix.")
