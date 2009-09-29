@@ -1,3 +1,4 @@
+library(sna)
 ewc <- function(vnetwork,transform=TRUE){
   if (!is.matrix(vnetwork)){
     stop("Input data must be an adjacency matrix.")
@@ -18,7 +19,7 @@ ewc <- function(vnetwork,transform=TRUE){
     }
     if (!sna::is.connected(vnetwork,connected="weak")){
       a <- dim(vnetwork)[1]
-      vnetwork <- component.largest(vnetwork,connected="weak",result="graph")
+      vnetwork <- sna::component.largest(vnetwork,connected="weak",result="graph")
       b <- dim(vnetwork)[1]
       warning("As vnetwork is not weakly connected, closeness.dist was calculated only for largest weak component:","\n",
               "  ",a-b," of ",a," nodes were omitted.")
