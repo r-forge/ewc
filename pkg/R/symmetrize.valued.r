@@ -1,15 +1,3 @@
-# symmetrize and keep line values
-# only for rule="weak" or rule="strong", otherwise use symmetrize(sna)
-# by Angela Bohn
-
-# Arguments
-# network: a valued adjacency matrix
-# rule: "weak" or "strong"
-# mode: "max" or "sum"
-
-# Value
-# a valued symmetric adjacency matrix
-
 symmetrize.valued <- function (vnetwork, mode="max"){
   if (!is.matrix(vnetwork)){
     stop("Input data must be an adjacency matrix (square).")
@@ -32,9 +20,3 @@ symmetrize.valued <- function (vnetwork, mode="max"){
   }
   newmat
 }
-
-# Example:
-#a <- rbind(c(1,2),c(3,4))
-#symmetrize.valued(a,rule="weak",mode="max")
-#b <- rbind(c(0,1),c(0,0))
-#symmetrize.valued(a,rule="weak",mode="max")

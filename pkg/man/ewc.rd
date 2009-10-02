@@ -9,7 +9,7 @@ ewc(vnetwork,transform=TRUE)
 }
 \arguments{
   \item{vnetwork}{A valued adjacency matrix.}
-  \item{transform}{Binary. If TRUE: If \code{vnetwork} is not strongly connected but weakly connected (see ?component.dist(sna)),
+  \item{transform}{(not implemented) Logical. If TRUE: If \code{vnetwork} is not strongly connected but weakly connected (see ?component.dist(sna)),
   \code{vnetwork} will be symmetrized using the sum of line values (see ?symmetrize.valued(ewc)).
   If \code{vnetwork} is not even weakly connected, the EWC will only be calculated for the largest weak component.
   If the largest weak component is not strongly connected, it will be symmetrized using the sume of line values.
