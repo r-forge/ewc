@@ -1,5 +1,3 @@
-source("symmetrize.valued.r")
-
 wdnc <- function(vnetwork){     # vnetwork is a weighted adjacency matrix
   if (!is.matrix(vnetwork)){
     stop("Input data must be an adjacency matrix.")
