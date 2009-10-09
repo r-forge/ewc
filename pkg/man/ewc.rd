@@ -7,10 +7,10 @@
 \usage{
 ewc(vnetwork)
 }
-\arguments{\item{vnetwork}{A valued adjacency matrix.}}
-\value{A vector of length \code{dim(vnetwork)[1]} (if not transformed) containing the EWC values.}
+\arguments{\item{vnetwork}{A valued adjacency matrix. Must be weakly connected}}
+\value{A vector of length \code{dim(vnetwork)[1]} containing the EWC values.}
 \details{The EWC is defined as:
-\deqn{C_{ewc}(i)=\frac{\sum_{j}{\frac{{\rm llv}(i,j)}{d(i,j)}}}{\max(lv)(n-1)}},
+\eqn{EWC(i)=\frac{\sum_{j}{\frac{llv(i,j)}{d(i,j)}}}{\max(lv)(n-1)}},
 where
 \eqn{llv(i,j)} is the average last line value on the path from node $i$ to node $j$,
 \eqn{d(i,j)} is the distance from $i$ to $j$ and
@@ -18,7 +18,7 @@ where
 }
 \references{Angela Bohn, Norbert Walchhofer, Patrick Mair and Kurt Hornik.
 Social Network Analysis of Weighted Telecommunications Graphs. 2009.
-Research Report Series 84, Department of Statistics and Mathematics, Wirtschaftsuniversit&auml;t Wien.}
+Research Report Series 84, Department of Statistics and Mathematics, Wirtschaftsuniversität Wien.}
 \author{Angela Bohn \email{angela.bohn@gmail.com} and Norbert Walchhofer}
 \examples{
 vnetwork <- rbind(c(0,2),c(3,0))

@@ -9,9 +9,10 @@ symmetrize.valued(vnetwork,mode="max")
 }
 \arguments{
   \item{vnetwork}{A valued adjacency matrix.}
-  \item{mode}{max or sum. max takes the maximum of the two line values between two nodes and sum takes the sum.}
+  \item{mode}{\code{max} or \code{sum}. \code{max} takes the maximum of the two 
+  line values between two nodes and \code{sum} takes the sum.}
 }
-\details{Corresponds to symmetrize(sna) with rule="weak", only that result is a valued matrix.}
+\details{Corresponds to \code{symmetrize(sna)} with \code{rule="weak"}, only that result is a valued matrix.}
 \value{A symmetric valued adjacency matrix.}
 \author{Angela Bohn \email{angela.bohn@gmail.com} }
 \examples{
