@@ -1,5 +1,6 @@
 \name{ewc}
 \alias{ewc}
+\encoding{UTF-8}
 \title{Edge-Weighted Closeness}
 \description{
   Calculates edge-weighted closeness, a weighted version of closeness(sna).
@@ -19,7 +20,7 @@ where
 \references{Angela Bohn, Norbert Walchhofer, Patrick Mair and Kurt Hornik.
 Social Network Analysis of Weighted Telecommunications Graphs. 2009.
 Research Report Series 84, Department of Statistics and Mathematics, Wirtschaftsuniversität Wien.}
-\author{Angela Bohn \email{angela.bohn@gmail.com} and Norbert Walchhofer}
+\author{Angela Bohn \email{angela.bohn at gmail.com} and Norbert Walchhofer}
 \examples{
 vnetwork <- rbind(c(0,2),c(3,0))
 ewc(vnetwork)
