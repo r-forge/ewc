@@ -2,7 +2,7 @@
 \alias{symmetrize.valued}
 \title{Symmetrizes a valued matrix}
 \description{
-  Symmetrized a valued matrix. (\code{symmetrize(sna)} binarizes matrices.)
+  Symmetrized a valued matrix. (\code{symmetrize(sna)} binarizes matrices).
 }
 \usage{
 symmetrize.valued(vnetwork,mode="max")

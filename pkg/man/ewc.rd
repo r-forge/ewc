@@ -19,7 +19,7 @@ where
 }
 \references{Angela Bohn, Norbert Walchhofer, Patrick Mair and Kurt Hornik.
 Social Network Analysis of Weighted Telecommunications Graphs. 2009.
-Research Report Series 84, Department of Statistics and Mathematics, Wirtschaftsuniversität Wien.}
+Research Report Series 84, Department of Statistics and Mathematics, Vienna University of Economics and Business.}
 \author{Angela Bohn \email{angela.bohn at gmail.com} and Norbert Walchhofer}
 \examples{
 vnetwork <- rbind(c(0,2),c(3,0))
