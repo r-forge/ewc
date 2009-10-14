@@ -30,7 +30,6 @@ wdnc <- function(vnetwork){     # vnetwork is a weighted adjacency matrix
   }
   wd <- wd/(max(vnetwork)*(n-1))  # standardization of centralities
   ewcmatrix <- t(wd)
-  ewcmatrix <- rbind(ewcmatrix,wd)
   ewcmatrix[ewcmatrix=="Inf"] <- 0
   cluster <- apply(ewcmatrix, 2, which.max)
   names(cluster) <- NULL
