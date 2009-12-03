@@ -3,7 +3,7 @@
 \encoding{UTF-8}
 \title{Edge-Weighted Closeness}
 \description{
-  Calculates edge-weighted closeness, a weighted version of closeness(sna).
+  Calculate edge-weighted closeness, a weighted version of closeness(sna).
 }
 \usage{
 ewc(vnetwork)
@@ -24,4 +24,4 @@ Research Report Series 84, Department of Statistics and Mathematics, Vienna Univ
 \examples{
 vnetwork <- rbind(c(0,2),c(3,0))
 ewc(vnetwork)
-}
+}                                                     
